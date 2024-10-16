@@ -1,0 +1,75 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+
+{% block contenido %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 py-4">
+            <img src="{{ DetallesProducto.imagen.url }}" alt="" width="500px">
+        </div>
+        <div class="col-sm-6 py-4 text-white bg-dark">
+            <h2 class="text-center">{{ DetallesProducto.nombre }} / {{ DetallesProducto.detalle }}</h2>
+            <hr>
+            {% if ExtendUser.suscripcion == True and DetallesProducto.total_descuento != 0 %}
+            <h1 class="text-end">Precio: ${{ DetallesProducto.total_descuento }}</h1>
+            {% else %}
+            <h1 class="text-end">Precio: ${{ DetallesProducto.precio }}</h1>
+            {% endif %}
+            <h6 class="text-end">Stock: {{ DetallesProducto.stock }}</h6>
+            <br>
+            <h3>Características:</h3>
+            <table class="table mt-4" style="background-color: white;">
+                <tbody>
+                    <tr>
+                        <td>Tipo de Producto:</td>
+                        <td class="text-end">{{ DetallesProducto.tipo }}</td>
+                    </tr>
+                    <tr>
+                        <td>Marca:</td>
+                        <td class="text-end">{{ DetallesProducto.marca }}</td>
+                    </tr>
+                    <tr>
+                        <td>Detalles:</td>
+                        <td class="text-end">{{ DetallesProducto.detalle }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <div class="d-flex justify-content-end">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="codigo" id="codigo" value="{{ DetallesProducto.codigo }}">
+                    <input type="hidden" name="nombre" id="nombre" value="{{ DetallesProducto.nombre }}">
+                    <input type="hidden" name="marca" id="marca" value="{{ DetallesProducto.marca }}">
+                    {% if ExtendUser.suscripcion == True and aux.total_descuento != 0 %}
+                    <input type="hidden" name="precio" id="precio" value="{{ DetallesProducto.total_descuento }}">
+                    {% else %}
+                    <input type="hidden" name="precio" id="precio" value="{{ DetallesProducto.precio }}">
+                    {% endif %}
+                    <input type="hidden" name="stock" id="stock" value="{{ DetallesProducto.stock }}">
+                    <input type="hidden" name="detalle" id="detalle" value="{{ DetallesProducto.detalle }}">
+                    <input type="hidden" name="imagen" id="imagen" value="{{ DetallesProducto.imagen }}">
+                    <input type="hidden" name="tipo" id="tipo" value="{{ DetallesProducto.tipo }}">
+                    <div class="d-flex">
+                        {% if user.is_authenticated %}
+                        <input type="submit" class="btn btn-primary mx-3" value="Añadir al Carrito">
+                        <h5>Cantidad:<input type="number" name="cantidad" id="cantidad" class="count"
+                                style="width: 60px; height: 30px;" min="1" max="{{ DetallesProducto.stock }}" value="1">
+                        </h5>
+                        {% else %}
+                        <input type="button" onclick="necesitasLogearte()" class="btn btn-primary mx-3"
+                            value="Añadir al Carrito">
+                        <h5>Cantidad:<input type="number" name="cantidad" id="cantidad" class="count"
+                                style="width: 60px; height: 30px;" min="1" max="{{ DetallesProducto.stock }}" value="1">
+                        </h5>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

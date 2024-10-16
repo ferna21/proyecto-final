@@ -1,0 +1,38 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="col-sm-6 m-4">
+        <h3 class="mt-4 ms-4">Cambiar estado pedido</h3>
+        <p class="ms-4">Seleccione un nuevo estado para el pedido<span class="fw-bold"> #{{pedido.codigo}}</span></p>
+        <form action="/cambiar_estado/{{ pedido.codigo }}/" method="POST">
+            {% csrf_token %}
+            <select class="ms-4" name="estados" id="estados">
+                {% for estado in estados %}
+                {% if estado.estado == orden.estado_pedido %}
+                <option value="{{estado.estado}}" selected>{{estado.estado}}</option>
+                {% else %}
+                <option value="{{estado.estado}}">{{estado.estado}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn btn-success" values="Modificar">
+            {% if messages %}
+            {% for msj in messages %}
+            <script>
+                Swal.fire({
+                    title: 'Guardado!',
+                    text: '{{ msj }}',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            </script>
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row justify-content-center mt-4">
+        {% for aux in listarProd %}
+        <div class="col-sm-3 m-2">
+            <div class="card" style="width:300px">
+                {% if aux.imagen %}
+                <a href="{% url 'detalle_producto' aux.codigo %}"><img src="{{ aux.imagen }}"class="card-img-top" style="max-width: 300px; height: auto;"></a>
+                {% else %}
+                <img src="{% static 'app/img/comida whiskas.webp' %}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">Nombre: {{ aux.nombre }}</h5>
+                    <p class="card-text texto-precio">Marca: {{ aux.marca }}</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

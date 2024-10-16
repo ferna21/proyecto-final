@@ -1,0 +1,120 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container mt-3">
+    <h2>Historial de Compras</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Detalles compra</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aux in listarCompras %}
+            <tr>
+                <td>Articulos:<br>Cantidad:<br> Total pagar:
+                </td>
+                <td>{{ aux.articulos }} <br>{{ aux.cantidad }} <br> ${{ aux.total }} <br> {{ aux.estado_pedido }}</td>
+                <td>
+                    <div class="text-center m-2">
+                        <button type="button" class="btn btn-secondary btn-lg"><a class="text-white" href="{% url 'seguimiento' aux.codigo %}">
+                            Seguimiento</i></a>
+                        </button>
+                        
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" tabindex="-1" id="seguiModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguimiento</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <h2>Tu producto Llegó el 9 de Abril</h2>
+                    <hr>
+                    <h6>Numero Seguimiento: #982312331</h6>
+                    <div class="row justify-content-center">
+                        <img src="{% static 'app/img/Pedido Realizado.png' %}" alt="">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h6>Procesos:</h6>
+                            <h6>- Tu pedido esta siendo preparado</h6>
+                            <h6>- Tu pedido fue recibido en la sucursal</h6>
+                            <h6>- Tu pedido fue despachado</h6>
+                            <h6>- Tu producto va en camino</h6>
+                            <h6>- Tu pedido fue entregado con exito</h6>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <h6>Fecha</h6>
+                            <h6>07/04/22</h6>
+                            <h6>08/04/22</h6>
+                            <h6>09/04/22</h6>
+                            <h6>09/04/22</h6>
+                            <h6>09/04/22</h6>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <h6>Hora</h6>
+                            <h6>06:00 Hrs</h6>
+                            <h6>13:55 Hrs</h6>
+                            <h6>11:05 Hrs</h6>
+                            <h6>13:55 Hrs</h6>
+                            <h6>19:30 Hrs</h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="boletaModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Boleta</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    {% for aux in listarCompras %}
+                    <h2>{{ aux.nombre }} / {{ aux.detalle }} ${{ aux.total }}</h2>
+                    <hr>
+                    <h6>Numero Compra: #{{ aux.id }}</h6>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-7">
+                            <img src="{{ aux.imagen.url }}" alt="" width="400px">
+                        </div>
+                    </div>
+                    <h6>Precio por unidad: ${{ aux.precio }}</h6>
+                    <h6>Cantidad: {{ aux.cantidad }}</h6>
+                    <h6>Subtotal: ${{ aux.subtotal }}</h6>
+                    <h6>IVA: ${{ aux.precioiva }}</h6>
+                    <h6>Total: ${{ aux.total }}</h6>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

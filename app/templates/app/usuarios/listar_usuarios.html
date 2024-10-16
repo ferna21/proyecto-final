@@ -1,0 +1,51 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+
+
+{% block contenido %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 mt-3">
+                <table class="table table-sm table-condensed table-striped" style="font-size: small;">
+
+                    <thead>
+                        <th>NOMBRE USUARIO</th>
+                        <th>RUT</th>
+                        <th>TELEFONO</th>
+                        <th>IMAGEN</th>
+                        <th>SUSCRITO</th>
+                        <th>OPCIONES</th>
+                    </thead>
+                    <tbody>
+                        {% for aux in listarUsuarios %}
+                        <tr>
+                            <td>{{ aux.djangoUser }}</td>
+                            <td>{{ aux.rut }}-{{ aux.dv }}</td>
+                            <td>{{ aux.telefono }}</td>
+                            {% if aux.imagen == '0' %}
+                            <td>No posee imagen</td>
+                            {% else %}
+                            <td>{{ aux.imagen }}</td>
+                            {% endif %}
+                            {% if aux.suscripcion == True %}
+                            <th class="text-success">Usuario suscrito</th>
+                            {% else %}
+                            <th class="text-danger">Usuario no suscrito</th>
+                            {% endif %}
+                            <td>
+                                {% if perms.app.change_extend_user %}
+                                <a href="{% url 'modificar_usuario' aux.rut %}" class="btn btn-sm btn-info">Modificar</a>
+                                {% endif %}
+                                {% if perms.app.delete_extend_user %}
+                                <a onclick="confirmDeleteUser({{ aux.rut }})" class="btn btn-sm btn-danger">Eliminar</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>            
+            </div>
+        </div>
+    </div>
+{% endblock %}

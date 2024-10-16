@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+
+    <title>Tienda Mascotas</title>
+</head>
+
+<body>
+
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:void(0)"><img src="{% static 'app/img/pngtree-dog-moon-logo-png-image_847379.jpg' %}"
+                    alt="" width="60"><span class="navbar-text text-white m-4">Tienda de Mascotas</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="mynavbar">
+                <form class="d-flex me-auto">
+                    <input class="form-control me-2" type="text" placeholder="Buscar">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav mx-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#sesionModal"><i
+                                class="fa fa-cart-shopping"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#sesionModal"><i
+                                class="fa fa-user"></i></a>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="javascript:void(0)" data-bs-toggle="modal"
+                            data-bs-target="#sesionModal">Promociones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" data-bs-toggle="modal"
+                            data-bs-target="#sesionModal">Descuentos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block contenido %}
+    <div class="container-fluid">
+        <div class="col-sm-6 m-4">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <input type="submit" class="btn btn-success" values="Guardar">
+                {{ Mensaje }}
+            </form>
+            {% endblock %}
+        </div>
+    </div>
+    
+
+
+    <div class="modal" tabindex="-1" id="sesionModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container-fluid">
+                    <form action="/action_page.php" class="was-validated m-3">
+                        <div class="mb-3 mt-3">
+                            <label for="email" class="form-label">Correo:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Correo Electronico"
+                                name="email" required>
+                            <div class="valid-feedback">
+                                Correo Registrado!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Contraseña:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Insertar Contraseña"
+                                name="pswd" required>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember"> Mantener Sesión
+                                Iniciada
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#registrarModal"><button type="button"
+                            class="btn btn-secondary" data-bs-dismiss="modal">Registrarte</button></a>
+                    <a href="{% url 'logeado' %}"><button type="button" class="btn btn-primary">Iniciar Session</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="registrarModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrarte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container-fluid">
+                    <form action="/action_page.php" class="was-validated m-3">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mt-3">
+                                <label for="validationCustom01" class="form-label">Primer Nombre</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Primer Nombre" required>
+                            </div>
+                            <div class="col-sm-6 mb-3 mt-3">
+                                <label for="validationCustom02" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="validationCustom02" placeholder="Apellido"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 mb-3 mt-0">
+                                <label for="validationCustom04" class="form-label">País</label>
+                                <select class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">País</option>
+                                    <option>Chile</option>
+                                    <option>Argentina</option>
+                                    <option>Colombia</option>
+                                    <option>Estados Unidos</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Porfavor escoga un país válido.
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3 mt-0">
+                                <label for="validationCustom04" class="form-label">Región</label>
+                                <select class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Región</option>
+                                    <option>Metropolitana</option>
+                                    <option>Valdivia</option>
+                                    <option>Valparaiso</option>
+                                    <option>La Serena</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Porfavor escoga un región válida.
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3 mt-0">
+                                <label for="validationCustom04" class="form-label">Comuna</label>
+                                <select class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Comuna</option>
+                                    <option>Puente Alto</option>
+                                    <option>La Reina</option>
+                                    <option>Providencia</option>
+                                    <option>Maipú</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Porfavor escoga una comuna válida.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8 mb-3 mt-0">
+                                <label for="validationCustom03" class="form-label">Dirección:</label>
+                                <input type="text" class="form-control" id="validationCustom03" required>
+                                <div class="invalid-feedback">
+                                    Inserte una dirección válida.
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3 mt-0">
+                                <label for="validationCustom03" class="form-label">Código Postal:</label>
+                                <input type="text" class="form-control" id="validationCustom03" required>
+                                <div class="invalid-feedback">
+                                    Inserte un código válido.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Contraseña:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Insertar Contraseña"
+                                name="pswd" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pwd" class="form-label">Confirmar Contraseña:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Confirmar Contraseña"
+                                name="pswd" required>
+                            <div class="valid-feedback">
+                                Contraseña confirmada!
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember" required> Acepto
+                                terminos y condiciones
+                            </label>
+                            <br>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember"> Desea recibir contenido
+                                publicitado a su correo?
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="./index.html"><button type="button" class="btn btn-primary">Registrarse</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white" id="asd">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-facebook-f "></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1 rounded-circle" href="#!" role="button"><i
+                        class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Form -->
+            <section class="">
+                <form action="">
+                    <!--Grid row-->
+                    <div class="row d-flex justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <p class="pt-2">
+                                <strong>Suscribete para beneficios</strong>
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-5 col-12">
+                            <!-- Email input -->
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="form5Example21" class="form-control" />
+                                <label class="form-label" for="form5Example21">Correo Electronico</label>
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <!-- Submit button -->
+                            <a href="#mynavbar">
+                                <button type="button" class="btn btn-outline-light mb-4" data-bs-toggle="modal"
+                                    data-bs-target="#sesionModal">
+                                    Subscribe
+                                </button></a>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </form>
+            </section>
+            <!-- Section: Form -->
+
+            <!-- Section: Text -->
+            <section class="mb-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+                    repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+                    eum harum corrupti dicta, aliquam sequi voluptate quas.
+                </p>
+            </section>
+            <!-- Section: Text -->
+
+            <!-- Section: Links -->
+            <section class="">
+
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="#">Tienditademascotas.cl</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+<h4>Inicio sesión</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+<button type="submit" class="btn btn-success">Iniciar sesión</button>
+<p><a href="{% url 'registro' %}">crear cuenta</a></p>
+</form>
+{% endblock %}

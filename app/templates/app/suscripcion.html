@@ -1,0 +1,96 @@
+{% extends 'app/basePerfil.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="col-sm-2"></div>
+<div class="col-sm-12">
+    <img class="mx-auto d-block" src="{% static 'app/img/main/npc-nutricion-cientifica-perros.png' %}" alt="">
+    <div class="row justify-content-center ">
+        {% if ExtendUser.suscripcion == True %}
+        
+            <div class="text-align text-success">
+                <h1>Estado suscripción: Suscrito</h1>
+                
+            </div>
+        </div>
+        {% else %}
+        
+            <div class="text-align text-danger">
+                <h1>Estado suscripción: No Suscrito</h1>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <div class="m-5 mt-1">
+        <h1>Al suscribirte obtienes</h2>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4 d-flex">
+                    
+                    <div class="col-sm-4">
+                        <div class="card" style="width:400px">
+                            <img class="card-img-top" src="{% static 'app/img/main/descarga.png' %}" alt="Card image">
+                            <div class="card-body">
+                              <h4 class="card-title">Envios gratis</h4>
+                              <p class="card-text">Obten 
+                                envios gratis durante todo el
+                                mes pagando tu suscripcion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 d-flex">
+
+                    <div class="col-sm-4">
+                        <div class="col-sm-9">
+                            <div class="card" style="width:400px"> 
+                                <div class="card-body">
+                                  <h4 class="card-title">Precios más bajos</h4>
+                                  <p class="card-text">Con tu suscripcion obtienes
+                                    un descuento en todos los productos de la tienda.</p>
+                                </div>
+                                <img class="card-img-top" src="{% static 'app/img/main/descarga (1).png' %}" alt="Card image">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-4 d-flex">
+
+                    <div class="col-sm-4">
+                        <div class="col-sm-9">
+                            <div class="card" style="width:400px">
+                                <img class="card-img-top" src="{% static 'app/img/main/descarga (2).png' %}" alt="Card image">
+                                <div class="card-body">
+                                  <h4 class="card-title">Apoyas a una fundacion</h4>
+                                  <p class="card-text">Lo recaudado con las suscripciones
+                                    termina siendo donado a una fundacion para ayudar a los animales rescatados.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <h4 class="me-auto">Precio: / mes</h4>
+                    {% if ExtendUser.suscripcion == True %}
+                    <a href="" data-bs-toggle="modal" data-bs-target="#metodopagoModal"><button type="button"
+                            class="btn btn-primary btn-block mx-4" disabled>Suscribete</button></a>
+                    <a href="#"><button onclick="anularSuscripcion()" type="button" class="btn btn-danger btn-block">Anular
+                            Suscripción</button></a>
+                    {% else %}
+                    <a href="" data-bs-toggle="modal" data-bs-target="#metodopagoModal"><button type="button"
+                            class="btn btn-primary btn-block mx-4">Suscribete</button></a>
+                    <a href=""><button type="button" class="btn btn-danger btn-block" disabled>Anular
+                            Suscripción</button></a>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

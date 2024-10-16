@@ -1,0 +1,57 @@
+{% extends 'app/basePerfil.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+        <img src="{% static 'app/img/identificadores/11.jpg' %}" alt="" width="100">
+
+    </div>
+
+</div>
+
+    <div class="m-5 mt-1">
+        <h2>Datos Usuario</h2>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Nombre Completo:</th>
+                    <td class="text-end">{{ usuario.first_name }} {{ usuario.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre Usuario:</th>
+                    <td class="text-end">{{ usuario.username }}</td>
+                </tr>
+                <tr>
+                    <th>Rut:</th>
+                    <td class="text-end">{{ ExtendUser.rut }}-{{ ExtendUser.dv }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped">
+            <h2>Datos adicionales</h2>
+            <tbody>
+                <tr>
+                    <th>Correo Electronico:</th>
+                    <td class="text-end">{{ usuario.email }}</td>
+                </tr>
+                <tr>
+                    <th>Numero Celular:</th>
+                    <td class="text-end">+56 {{ ExtendUser.telefono }}</td>
+                </tr>
+                <tr>
+                    <th>Comuna:</th>
+                    <td class="text-end">Puente Alto</td>
+                </tr>
+                <tr>
+                    <th>Domicilio:</th>
+                    <td class="text-end">{{ ExtendUser.direccion }}</td>
+                </tr>
+            </tbody>
+        </table>
+       
+        </tbody>
+        </table>
+    </div>
+
+{% endblock %}

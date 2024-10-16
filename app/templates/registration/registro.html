@@ -1,0 +1,204 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<body>
+	<div class="container right-panel-active" id="container">
+		<div class="form-container sign-up-container">
+			<form action="" method="POST">
+				<h1 style="margin-top: 70px;">Crear tu Cuenta</h1>
+				{% csrf_token %}
+				<label for="">Nombre de Usuario:</label>
+				<input type="text" name="txtUser" maxlength="30" autofocus="" required="" id="txtUser">
+				<span class="helptext" id="spanUser"></span>
+				<br>
+				<label for="">Nombre:</label>
+				<input type="text" name="txtNombre" maxlength="40" autofocus="" required="" id="txtNombre">
+				<span class="helptext" id="spanNombre"></span>
+				<br>
+				<label for="">Apellido:</label>
+				<input type="text" name="txtApellidos" maxlength="40" autofocus="" required="" id="txtApellidos">
+				<span class="helptext" id="spanApellido"></span>
+				<br>
+				<label for="">Rut:</label>
+				<input type="text" name="txtRut" maxlength="8" autofocus="" required="" id="txtRut">
+				<span class="helptext" id="spanRut"></span>
+				<br>
+				<label for="">Dígito Verificador:</label>
+				<input type="text" name="txtDv" maxlength="1" autofocus="" required="" id="txtDv">
+				<span class="helptext" id="spanDv"></span>
+				<br>
+				<label for="">Dirreción:</label>
+				<input type="text" name="txtDireccion" maxlength="150" autofocus="" required="" id="txtDireccion">
+				<span class="helptext" id="spanDireccion"></span>
+				<br>
+				<label for="">Telefono:</label>
+				<input type="text" name="txtTel" maxlength="9" autofocus="" required="" id="txtTel">
+				<span class="helptext" id="spanTelefono"></span>
+				<br>
+				<label for="">Dirreción de correo electrónico:</label>
+				<input type="text" name="txtEmail" maxlength="150" autofocus="" required="" id="txtEmail">
+				<span class="helptext" id="spanEmail"></span>
+				<br>
+				<label for="">Contraseña:</label>
+				<input type="password" name="txtPassword" maxlength="20" autofocus="" required="" id="txtPassword">
+				<span class="helptext" id="spanPassword">
+					<ul>
+						<li>Su contraseña no puede ser muy similar a su otra información personal.</li>
+						<li>Su contraseña es muy corta. Debe contener al menos 8 caracteres.</li>
+						<li>Su contraseña no puede ser una contraseña de uso común.</li>
+						<li>Su contraseña no puede ser completamente numérica.</li>
+					</ul>
+				</span>
+				<br>
+				<label for="">Confirmación de contraseña:</label>
+				<input type="password" name="txtPassword2" maxlength="20" autofocus="" required="" id="txtPassword2">
+				<span class="helptext">Para verificar, introduzca la misma contraseña que introdujo antes.</span>
+				<br>
+				<input id="SubmitRegistro" type="submit" class="botonregistro" value="Registrate">
+			</form>
+
+			<script type="text/javascript">
+
+				// Validacion global.
+
+				function ValidacionForm() {
+
+					// Nombre de usuario.
+					var username = document.getElementById("txtUser").value
+					var spanUsername = document.getElementById("spanUser");
+					if (username.length > 4) {
+						username = true
+						spanUsername.innerHTML = `<span class="helptext" id="spanUser"></span>`;
+					} else {
+						username = false
+						spanUsername.innerHTML = `<span class="helptext" id="spanUser">Largo mínimo 5 carácteres</span>`;
+					}
+
+					// Nombre.
+					var nombre = document.getElementById("txtNombre").value
+					var spanNombre = document.getElementById("spanNombre");
+					if (nombre.length > 2) {
+						nombre = true
+						spanNombre.innerHTML = `<span class="helptext" id="spanNombre"></span>`;
+					} else {
+						nombre = false
+						spanNombre.innerHTML = `<span class="helptext" id="spanNombre">Largo mínimo 3 carácteres</span>`;
+					}
+
+					// Apellidos.
+					var apellido = document.getElementById("txtApellidos").value
+					var spanApellido = document.getElementById("spanApellido");
+					if (apellido.length > 2) {
+						apellido = true
+						spanApellido.innerHTML = `<span id="spanApellido"></span>`;
+					} else {
+						apellido = false
+						spanApellido.innerHTML = `<span class="helptext" id="spanApellido">Largo mínimo 3 carácteres</span>`;
+					}
+
+					// E-mail.
+					var email = document.getElementById("txtEmail").value
+					var spanEmail = document.getElementById("spanEmail");
+					if (email.length > 5) {
+						email = true
+						spanEmail.innerHTML = `<span class="helptext" id="spanEmail"></span>`;
+					} else {
+						email = false
+						spanEmail.innerHTML = `<span class="helptext" id="spanEmail">Ingrese un correo Válido</span>`;
+					}
+
+					// Contraseña.
+					var password1 = document.getElementById("txtPassword").value
+					var password2 = document.getElementById("txtPassword2").value
+					var spanPassword = document.getElementById("spanPassword");
+					if (password1.length > 5 && password1 === password2) {
+						password1 = true
+						spanPassword.innerHTML = `<span class="helptext" id="spanPassword"></span>`;
+					} else {
+						password1 = false
+						spanPassword.innerHTML = `<span class="helptext" id="spanPassword"><ul><li>Su contraseña no puede ser muy similar a su otra información personal.</li>
+						<li>Su contraseña es muy corta. Debe contener al menos 5 caracteres.</li><li>Su contraseña no puede ser una contraseña de uso común.</li>
+						<li>Su contraseña no puede ser completamente numérica.</li></ul></span>`;
+					}
+
+					// RUT.
+					var rut = document.getElementById("txtRut").value
+					var spanRut = document.getElementById("spanRut");
+					if (rut.length >= 7 && rut.length <= 8 ) {
+						rut = true
+						spanRut.innerHTML = `<span class="helptext" id="spanRut"></span>`;
+					} else {
+						rut = false
+						spanRut.innerHTML = `<span class="helptext" id="spanRut">Ingresa tu rut sin puntos ni digito verificador</span>`;
+					}
+
+					// RUT.
+					var dv = document.getElementById("txtDv").value
+					var spanDv = document.getElementById("spanDv");
+					if (dv.length == 1 ) {
+
+						if (dv.toLowerCase() == 'k' ) {
+							dv = true
+							spanDv.innerHTML = `<span class="helptext" id="spanDv"></span>`;
+
+						} else if( dv =! 0 && dv > 0) {
+							dv = true
+							spanDv.innerHTML = `<span class="helptext" id="spanDv"></span>`;
+
+						} else {
+							rut = false
+							spanDv.innerHTML = `<span class="helptext" id="spanDv">Ingrese un dígito veridicador Válido</span>`;
+						}
+
+					} else {
+						rut = false
+						spanDv.innerHTML = `<span class="helptext" id="spanDv">Ingrese un dígito veridicador Válido</span>`;
+					}
+
+					// Direccion.
+					var direccion = document.getElementById("txtDireccion").value
+					var spanDireccion = document.getElementById("spanDireccion");
+					if (direccion.length > 5) {
+						direccion = true
+						spanDireccion.innerHTML = `<span class="helptext" id="spanDireccion"></span>`;
+					} else {
+						direccion = false
+						spanDireccion.innerHTML = `<span class="helptext" id="spanDireccion">Ingrese una dirreción Válida</span>`;
+					}
+
+					// Telefono.
+					var telefono = document.getElementById("txtTel").value
+					var spanTelefono = document.getElementById("spanTelefono");
+					if (telefono.length == 9) {
+						telefono = true
+						spanTelefono.innerHTML = `<span class="helptext" id="spanTelefono"></span>`;
+					} else {
+						telefono = false
+						spanTelefono.innerHTML = `<span class="helptext" id="spanTelefono">Ingrese un número telefonico de 9 dígitos</span>`;
+					}
+
+				}
+			</script>
+		</div>
+    </div>
+	<!-- partial -->
+	<!--  <script  src="{% static 'app/js/login_register.js' %}"></script> -->
+</body>
+<style>
+	.botonregistro{
+	border-radius: 20px;
+	border: 1px solid #08e213;
+	background-color: #08e213;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+</style>
+    
+
+{% endblock %}
